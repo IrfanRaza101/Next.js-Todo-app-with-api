@@ -1,12 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { TodoItem } from '@/components/TodoItem';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Sun, Moon, Trash2, UserCircle } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
 const FaCheckCircle = dynamic(() => import('react-icons/fa').then(mod => mod.FaCheckCircle), { ssr: false });
 const FaHourglassHalf = dynamic(() => import('react-icons/fa').then(mod => mod.FaHourglassHalf), { ssr: false });
@@ -23,7 +17,6 @@ export default function Home() {
   const [newTodo, setNewTodo] = useState('');
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editText, setEditText] = useState('');
-  const [dark, setDark] = useState(false);
 
   // Fetch todos on component mount
   useEffect(() => {
@@ -74,10 +67,6 @@ export default function Home() {
     setTodos(todos.map(todo => todo.id === id ? updatedTodo : todo));
     setEditingId(null);
     setEditText('');
-  };
-
-  const clearCompleted = () => {
-    setTodos(todos.filter(todo => !todo.completed));
   };
 
   const completedCount = todos.filter(todo => todo.completed).length;
